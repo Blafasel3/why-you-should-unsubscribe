@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { MarketValueService } from '../services/market-value/market-value.service';
 
 @Component({
@@ -10,8 +10,6 @@ import { MarketValueService } from '../services/market-value/market-value.servic
 })
 export class NotUnsubscribingComponent implements OnInit, OnDestroy {
 
-  @Output()
-  asyncServiceCalled: EventEmitter<number> = new EventEmitter<number>();
   currentValue: number = 0;
   subscription: Subscription | undefined;
 

@@ -1,6 +1,6 @@
 <button (click)="onToggle()">Toggle</button>
 <span>Click the toggle button to start seeing the current value. Hitting it again hides the information. Open the browsers log to see the effect of the missing unsubscribe.</span>
 
-<div class="two-columns">
-    <app-not-unsubscribing *ngIf="isOpen" (asyncServiceCalled)="onServiceCalled($event)"></app-not-unsubscribing>
+<div *ngIf="isOpen" class="two-columns">
+    <app-not-unsubscribing ></app-not-unsubscribing>
 </div>

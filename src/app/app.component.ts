@@ -7,13 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   isOpen = false;
-  numberOfCalls = 0;
 
   onToggle(): void {
     this.isOpen = !this.isOpen;
-  }
-
-  onServiceCalled(numberOfCalls: number): void {
-    this.numberOfCalls = numberOfCalls;
   }
 }
