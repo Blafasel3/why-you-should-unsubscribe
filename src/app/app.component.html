@@ -1,4 +1,6 @@
 <button (click)="onToggle()">Toggle</button>
-<span>Times the service was called: {{numberOfCalls}} (This will be out of sync with the actual number of calls)</span>
+<span>Click the toggle button to start seeing the current value. Hitting it again hides the information. Open the browsers log to see the effect of the missing unsubscribe.</span>
 
-<app-not-unsubscribing *ngIf="isOpen" (asyncServiceCalled)="onServiceCalled($event)"></app-not-unsubscribing>
+<div class="two-columns">
+    <app-not-unsubscribing *ngIf="isOpen" (asyncServiceCalled)="onServiceCalled($event)"></app-not-unsubscribing>
+</div>

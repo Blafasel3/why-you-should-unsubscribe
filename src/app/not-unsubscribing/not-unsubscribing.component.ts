@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { interval, Observable, of, Subscription } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
+import { MarketValueService } from '../services/market-value/market-value.service';
 
 @Component({
   selector: 'app-not-unsubscribing',
@@ -11,9 +12,12 @@ export class NotUnsubscribingComponent implements OnInit, OnDestroy {
 
   @Output()
   asyncServiceCalled: EventEmitter<number> = new EventEmitter<number>();
-
-  currentValue: number = Math.random() * 100;
+  currentValue: number = 0;
   subscription: Subscription | undefined;
+
+  constructor(private marketValueService: MarketValueService) {
+    
+  }
 
   ngOnInit(): void {
     /**
@@ -22,10 +26,8 @@ export class NotUnsubscribingComponent implements OnInit, OnDestroy {
      * It could trigger basically anything such as an 
      * http call to retrieve some values from the backend or somehting like that.
      */
-    this.subscription = interval(1000) 
-    .pipe(
-      tap(i => this.handleServiceCallEvent(i)),
-      switchMap(() => this.callService())
+    this.subscription = interval(1000).pipe(
+      switchMap(() => this.marketValueService.fetchMarketValue())
     ).subscribe(value => this.currentValue = value);
   }
 
@@ -33,14 +35,4 @@ export class NotUnsubscribingComponent implements OnInit, OnDestroy {
     // FIXME
     // this.subscription?.unsubscribe();
   }
-
-  handleServiceCallEvent(i: number): void {
-    this.asyncServiceCalled.emit(i);
-    console.log('service called');
-  }
-
-  callService(): Observable<number> {
-    return of(Math.random() * 100); // this could be anything, e.g. a HTTP Call
-  }
-
 }
