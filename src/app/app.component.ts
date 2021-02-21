@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'why-you-should-unsubscribe';
+  isOpen = false;
+  numberOfCalls = 0;
+
+  onToggle(): void {
+    this.isOpen = !this.isOpen;
+  }
+
+  onServiceCalled(numberOfCalls: number): void {
+    this.numberOfCalls = numberOfCalls;
+  }
 }
